@@ -1,4 +1,5 @@
-import numpy as np
+#import numpy as np
+import random
 from word_connections_data import wc
 
 NumOfPlayers = 1
@@ -34,7 +35,7 @@ def FindNameIndex(name):
     return -1
 
 def ChooseNextWord(CurrentIndex):
-    NewId = np.random.randint(0,len(wc[CurrentIndex].connection))
+    NewId = random.randint(0,len(wc[CurrentIndex].connection))
     NextWord = wc[CurrentIndex].connection[NewId]
     print("Next word is " + NextWord)
     return FindNameIndex(NextWord)
@@ -44,14 +45,14 @@ def ChooseNextWord(CurrentIndex):
 def GetWordList():
     
     WordList = []
-    WordList.append(wc[np.random.randint(0,len(wc))].name)
+    WordList.append(wc[random.randint(0,len(wc))].name)
     CurrentIdList = []
     CurrentIdList.append(FindNameIndex(WordList[0]))
     
     for i in range(1,NumOfWords):
         ChooseWord = True #If Word still needs to be chosen
         while ChooseWord:
-            NewId = np.random.randint(0,len(wc[CurrentIdList[i-1]].connection)) #randomly choose after word
+            NewId = random.randint(0,len(wc[CurrentIdList[i-1]].connection)) #randomly choose after word
             NextWord = wc[CurrentIdList[i-1]].connection[NewId]
         
             if NextWord != "":  #if choosen word is not empty save it
