@@ -6,7 +6,7 @@
 def main():
     with open("TestFile.txt", "w") as f:
         f.write("Testing ZA WORLDO!\n")
-        f.write("NEW LINE BITCH")
+        f.write("NEW LINE TEST")
 
 
 
