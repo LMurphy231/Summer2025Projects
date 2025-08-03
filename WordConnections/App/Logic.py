@@ -119,7 +119,7 @@ def CheckUserGuess(UserInput, PlayerNum):
         return False
     
 
-    1
+    
 def SetupPlayers(NumOfPlayers):
     #Limit number of players
     

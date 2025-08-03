@@ -3,8 +3,8 @@ from tkinter import *
 from tkinter.ttk import *
 
 window = Tk()
+
 def ReadFile():
-    
     with open("TestFile.txt", "r") as f:
         content = f.read()
         print(content)
