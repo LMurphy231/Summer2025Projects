@@ -2,8 +2,7 @@
 import random
 from word_connections_data import wc
 
-NumOfPlayers = 1
-NumOfWords = 2
+
 
 
     
@@ -42,7 +41,7 @@ def ChooseNextWord(CurrentIndex):
 
 
 
-def GetWordList():
+def GetWordList(NumOfWords):
     
     WordList = []
     WordList.append(wc[random.randint(0,len(wc))].name)
@@ -98,7 +97,7 @@ def UpdateCharList(index, PlayerNum):
 
     
 
-def GetUserGuess(PlayerNum):
+def GetUserGuess(PlayerNum, NumOfWords):
     if Player[PlayerNum].CurrentIndex >= NumOfWords: #prevents out of index
         return True
     
@@ -120,7 +119,7 @@ def CheckUserGuess(UserInput, PlayerNum):
     
 
     
-def SetupPlayers(NumOfPlayers):
+def SetupPlayers(NumOfPlayers, NumOfWords):
     #Limit number of players
     
 
@@ -128,7 +127,7 @@ def SetupPlayers(NumOfPlayers):
 
     for i in range(NumOfPlayers):
         #print("Setting up player " + str(i))
-        WordList, IndexList = GetWordList()
+        WordList, IndexList = GetWordList(NumOfWords)
         WordCharList, HiddenCharList = GetCharList(WordList)
         Player.append(PlayerStats(WordList, IndexList, 1, WordCharList, HiddenCharList, 1, False))
         #PrintPlayerStats(i)
@@ -155,7 +154,7 @@ def PrintList(List):
 
 
 
-def PrintPlayerStats(PlayerNum):
+def PrintPlayerStats(PlayerNum, NumOfWords):
     print("Player " + str(PlayerNum + 1) + " Stats: ")
     print()
     
@@ -178,7 +177,7 @@ def PrintPlayerStats(PlayerNum):
 
 
 #Player Turn
-def Turn(PlayerNum):
+def Turn(PlayerNum, NumOfWords):
     #Make Sure player hasnt won
     
     print("Player " + str(PlayerNum + 1) + " is up!") #Introduce player
@@ -229,7 +228,7 @@ def CheckPlayerVictories(NumOfPlayers):
     return 2 #more than one player has won
 
 
-def AnnounceWinner():
+def AnnounceWinner(NumOfPlayers):
     if NumOfPlayers > 0:
         for i in range(NumOfPlayers + 1):
             if Player[i].HasWon:
@@ -237,3 +236,4 @@ def AnnounceWinner():
                 return
     else:
         print("You Win!!!!")
+
