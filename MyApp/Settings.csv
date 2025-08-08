@@ -1,0 +1,5 @@
+WordCount,5,Word Connections,Slider,2,10
+PlayerCount,1,Word Connections,Slider,1,4
+Master Volume,34,General,Slider,0,100
+Resolution,500x700,General,Combobox,,,500x700 800x600 1024x768 1280x720 1280x1024 1366x768 1600x900 1600x1200 1920x1080
+

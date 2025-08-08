@@ -2,7 +2,8 @@
 import random
 from word_connections_data import wc
 
-
+NumOfPlayers = 1
+NumOfWords = 2
 
 
     
@@ -41,7 +42,7 @@ def ChooseNextWord(CurrentIndex):
 
 
 
-def GetWordList(NumOfWords):
+def GetWordList():
     
     WordList = []
     WordList.append(wc[random.randint(0,len(wc))].name)
@@ -97,7 +98,7 @@ def UpdateCharList(index, PlayerNum):
 
     
 
-def GetUserGuess(PlayerNum, NumOfWords):
+def GetUserGuess(PlayerNum):
     if Player[PlayerNum].CurrentIndex >= NumOfWords: #prevents out of index
         return True
     
@@ -118,8 +119,8 @@ def CheckUserGuess(UserInput, PlayerNum):
         return False
     
 
-    
-def SetupPlayers(NumOfPlayers, NumOfWords):
+    1
+def SetupPlayers(NumOfPlayers):
     #Limit number of players
     
 
@@ -127,7 +128,7 @@ def SetupPlayers(NumOfPlayers, NumOfWords):
 
     for i in range(NumOfPlayers):
         #print("Setting up player " + str(i))
-        WordList, IndexList = GetWordList(NumOfWords)
+        WordList, IndexList = GetWordList()
         WordCharList, HiddenCharList = GetCharList(WordList)
         Player.append(PlayerStats(WordList, IndexList, 1, WordCharList, HiddenCharList, 1, False))
         #PrintPlayerStats(i)
@@ -154,7 +155,7 @@ def PrintList(List):
 
 
 
-def PrintPlayerStats(PlayerNum, NumOfWords):
+def PrintPlayerStats(PlayerNum):
     print("Player " + str(PlayerNum + 1) + " Stats: ")
     print()
     
@@ -177,7 +178,7 @@ def PrintPlayerStats(PlayerNum, NumOfWords):
 
 
 #Player Turn
-def Turn(PlayerNum, NumOfWords):
+def Turn(PlayerNum):
     #Make Sure player hasnt won
     
     print("Player " + str(PlayerNum + 1) + " is up!") #Introduce player
@@ -228,7 +229,7 @@ def CheckPlayerVictories(NumOfPlayers):
     return 2 #more than one player has won
 
 
-def AnnounceWinner(NumOfPlayers):
+def AnnounceWinner():
     if NumOfPlayers > 0:
         for i in range(NumOfPlayers + 1):
             if Player[i].HasWon:
@@ -237,3 +238,66 @@ def AnnounceWinner(NumOfPlayers):
     else:
         print("You Win!!!!")
 
+
+
+
+def main():
+    while True:
+        try:
+            NumOfPlayers = int(input("Enter Number of Players (MAX 4): "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a number between 1 and 4!!!")
+
+    if NumOfPlayers > 4:
+        NumOfPlayers = 4
+    elif NumOfPlayers < 1:
+        NumOfPlayers = 1 
+       
+              
+    SetupPlayers(NumOfPlayers)
+    GetWordList()
+    InGame = True
+    while InGame:
+        print()
+        if NumOfPlayers > 1:
+            for i in range(NumOfPlayers):
+                
+                while True:
+                    if not Turn(i):
+                        break
+
+            if CheckPlayerVictories(NumOfPlayers) == 2:
+                print("Reseting Players")
+                InGame = True
+                ResetPlayers(NumOfPlayers)
+            elif CheckPlayerVictories(NumOfPlayers) == 1:
+                InGame = False
+                break
+
+        else: 
+            print("SinglePlayer")
+            while True:
+                Turn(0)
+                if  Player[0].CurrentIndex >= NumOfWords:
+                    InGame = False
+                    break
+    AnnounceWinner()
+    print("GAME OVER!!")
+
+            
+
+   
+    
+    
+    
+    
+
+   
+    
+    
+    
+
+    
+if __name__ == "__main__":
+    main()  

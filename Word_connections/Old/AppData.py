@@ -4,7 +4,7 @@ from tkinter.ttk import *
 import csv
 import ast
 import random
-from word_connections_data import wc
+from MyApp.Apps.Word_Connections.word_connections_data import wc
 import time
 
 root = tk.Tk()
@@ -148,8 +148,6 @@ def display_settings():
 def change_resolution(event):
     new_resolution = event.widget.get()
     root.geometry(new_resolution) # width x height
-    
-
 
 def update_setting(value, i, label = None):
     SettingsList[i].value = int(float(value))

@@ -1,8 +1,16 @@
 
-from word_connection import WordConnection
+
+class WordConnection:
+    def __init__(self,name,connection):
+        self.name = name
+        self.connection = connection
+        
+    def __str__(self):
+        return f"WordConnection(name={self.name}, connection={self.connection})"
     
 #    WordConnection("", ["", "", ""]),
 wc = [
+
 WordConnection("People", ["Watch"]),
 WordConnection("Watch", ["Dog", "Out"]),
 WordConnection("Under", ["Dog", "Over", "Line", "Stand", "Wear"]),
