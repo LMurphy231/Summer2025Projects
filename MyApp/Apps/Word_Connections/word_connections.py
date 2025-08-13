@@ -261,8 +261,7 @@ class WordConnectionsGame:
         except tk.TclError:
             print("crashed at clear window")
             self.InGame = False
-            pass
-        
+            pass      
 
 # endregion
 
@@ -301,11 +300,12 @@ class WordConnectionsGame:
                     return
         #else:
             #print("You Win!!!!")
+    
     def victory_screen(self, winning_player):
         self.clear_window()
         #print("updating to victory screen")
         word_connections_victory_title = Label(self.root, text = "Player " + str((winning_player + 1)) + " has won!!!", font = "Cambria 25 bold")
-        word_connections_victory_title.grid(row = 0, column = 0, padx = 125, pady = 25, columnspan=3, sticky="ns")
+        word_connections_victory_title.grid(row = 0, column = 0, padx = 0, pady = 25, columnspan=3, sticky="ns")
         self.player = {}
         self.game_over = True
         

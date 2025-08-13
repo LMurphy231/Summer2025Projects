@@ -16,7 +16,6 @@ import time
 import random
 
 
-
 class SettingOption:
     def __init__(self, name, line_num, value, category, category_type, type, min_value = None, max_value = None, list_values = None):
         self.line_num = line_num
@@ -107,7 +106,7 @@ class AppData:
 
         #Pause Menu
         self.pause_label = tb.Label(self.root, text="Game Paused", font=self.dynamic_title_font)
-        self.resume_button = tb.Button(self.root, text = "Resume", command = self.resume_game)
+        self.resume_button = tb.Button(self.root, text = "Resume", command = self.go_back_button)
 
         #Game Select display
         self.game_title = tb.Label(self.root, text="Choose Game", font=self.dynamic_title_font)
@@ -138,22 +137,20 @@ class AppData:
             self.previous_tab.pop()
             self.display(self.previous_tab.pop())
             
-    def resume_game(self):
-        self.pause_game()
-    
     def pause_game(self,event = None):
-        if self.previous_tab[-1] == self.previous_tab[-2]:
-            self.previous_tab.pop()
-        if not self.current_game or not getattr(self.current_game, "InGame", False):
-            self.go_back_button()
-        else:
-            if self.is_paused:
-                if self.previous_tab[-1] == "Pause":
-                    self.is_paused = False
+        if len(self.previous_tab) > 1:
+            if self.previous_tab[-1] == self.previous_tab[-2]:
+                self.previous_tab.pop()
+            if not self.current_game or not getattr(self.current_game, "InGame", False):
                 self.go_back_button()
             else:
-                self.is_paused = True
-                self.display("Pause")
+                if self.is_paused:
+                    if self.previous_tab[-1] == "Pause":
+                        self.is_paused = False
+                    self.go_back_button()
+                else:
+                    self.is_paused = True
+                    self.display("Pause")
 
     def quit_app(self):
         print("Exiting Program")
@@ -392,7 +389,6 @@ class AppData:
                     slider.set(item.value)
                     slider.grid(row = i + 1, column = 1, padx = 5, pady = 5)
                     slider.config(command = lambda value, index = CurrentSetting, lbl = variable_label: self.update_setting(value, index, lbl))
-                    print(item.name)
                     if item.name == "Master Volume":
                         slider.bind("<ButtonRelease-1>", self.change_volume)
 
@@ -475,5 +471,4 @@ class AppData:
 if __name__ == "__main__":
     root = tb.Window(themename="solar")
     app = AppData(root)
-    
     root.mainloop()
